@@ -1,0 +1,149 @@
+package com.trentkillinger.travelbuddy;
+
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.view.View.OnClickListener;
+import android.app.Dialog;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.app.DatePickerDialog;
+
+import java.util.Calendar;
+
+public class MainActivity extends AppCompatActivity {
+
+    private Context context = this;
+    private Button buttonStartDate;
+    private Button buttonEndDate;
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        buttonEndDate = (Button) findViewById(R.id.buttonEndDate);
+        buttonStartDate = (Button) findViewById(R.id.buttonStartDate);
+
+        setContentView(R.layout.activity_main);
+
+        ImageView imageViewProfilePicture = (ImageView) findViewById(R.id.imageViewProfilePicture);
+
+        imageViewProfilePicture.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // custom dialog
+                final Dialog dialog = new Dialog(context);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setContentView(R.layout.get_user_profile_picture_layout);
+                dialog.setTitle("Get A Profile Picture");
+
+                ImageView imageViewSelectPicture = (ImageView) dialog.findViewById(R.id.imageViewSelectImage);
+                imageViewSelectPicture.setImageResource(R.drawable.folderphoto);
+
+                ImageView imageViewTakePicture = (ImageView) dialog.findViewById(R.id.imageViewTakePicture);
+                imageViewTakePicture.setImageResource(R.drawable.camera);
+
+                dialog.show();
+            }
+        });
+
+        Button buttonContinue = (Button) findViewById(R.id.buttonContinue);
+
+        buttonContinue.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.request_listing_layout);
+                Spinner stateDropDown = (Spinner) findViewById(R.id.spinnerState);
+                String[] stateItems = new String[]{"AK",
+                        "AL",
+                        "AZ",
+                        "AR",
+                        "CA",
+                        "CO",
+                        "CT",
+                        "DE",
+                        "FL",
+                        "GA",
+                        "HI",
+                        "ID",
+                        "IL",
+                        "IN",
+                        "IA",
+                        "KS",
+                        "KY",
+                        "LA",
+                        "ME",
+                        "MD",
+                        "MA",
+                        "MI",
+                        "MN",
+                        "MS",
+                        "MO",
+                        "MT",
+                        "NE",
+                        "NV",
+                        "NH",
+                        "NJ",
+                        "NM",
+                        "NY",
+                        "NC",
+                        "ND",
+                        "OH",
+                        "OK",
+                        "OR",
+                        "PA",
+                        "RI",
+                        "SC",
+                        "SD",
+                        "TN",
+                        "TX",
+                        "UT",
+                        "VT",
+                        "VA",
+                        "WA",
+                        "WV",
+                        "WI",
+                        "WY"};
+                ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, R.layout.support_simple_spinner_dropdown_item, stateItems);
+                stateDropDown.setAdapter(stateAdapter);
+            }
+        });
+
+        Spinner genderDropDown = (Spinner) findViewById(R.id.spinnerMaleFemale);
+        String[] genderItems = new String[]{"M", "F"};
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, genderItems);
+        genderDropDown.setAdapter(genderAdapter);
+
+        class mDateSetListener implements DatePickerDialog.OnDateSetListener {
+
+            Button button = (Button)findViewById(R.id.buttonStartDate);
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                // getCalender();
+                int mYear = year;
+                int mMonth = monthOfYear;
+                int mDay = dayOfMonth;
+                button.setText("FUCK");
+
+            }
+        }
+
+    }
+}
+
+
